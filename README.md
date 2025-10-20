@@ -1,4 +1,4 @@
-TravGarNey ✈️🌏📝
+### TravGarNey ✈️🌏📝
 
 ## Project Overview:
 
@@ -28,7 +28,7 @@ Full C.R.U.D. capabilities (Create, Read, Update and Delete).
 
 
 ## 🧭 TravGarNey API Documentation
- # Base URL
+ ## Base URL
    http://localhost:3000/api
 
 ```  
@@ -41,7 +41,7 @@ PUT	/trips/:id	Update a trip	{ any field }	{ updatedTrip }
 DELETE	/trips/:id	Delete a trip	–	{ message: "Trip deleted successfully" }
 ```
 
-```
+``
 🧳 Journal Routes
 Method	Endpoint	Description	Request Body	Response
 GET	/journals	Get all journal entries	–	[ {Journal}, ... ]
@@ -49,15 +49,15 @@ GET	/journals?tripId=<id>	Get journals for a specific trip	–	[ {Journal}, ... 
 POST	/journals	Create a new journal entry	{ tripId, title, content, photo? }	{ newJournal }
 PUT	/journals/:id	Update a journal entry	{ any field }	{ updatedJournal }
 DELETE	/journals/:id	Delete a journal entry	–	{ message: "Journal deleted successfully" }
-```
+``
 
-```
+``
 ⚠️ Error Responses
 Code	Message
 400	Missing required fields
 404	Resource not found
 500	Server error
-```
+``
 
 
 
