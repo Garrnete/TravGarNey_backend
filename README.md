@@ -1,4 +1,4 @@
-✈️🧭📝 TravGarNey ✈️🧭📝
+✈️📝 TravGarNey ✈️📝
 
 ## Project Overview:
 
@@ -8,11 +8,11 @@ A travel and journaling web app designed to help users to plan, record and reliv
 
 TravGarNey was created to help travelers:
 
-Organize trip details such as destinations, budgets, and dates.
+Organize trip details such as destinations, budgets and dates.
 
 Record daily experiences through text and photos.
 
-Reflect on their adventures in a private, digital journal.
+Reflect on their adventures in a private and digital journal.
 
 From a technical perspective, this project demonstrates proficiency in full-stack web development, including:
 
@@ -24,4 +24,4 @@ RESTful API creation with Express.
 
 Data persistence using MongoDB.
 
-Full C.R.U.D. capabilities (Create, Read, Update, Delete).
+Full C.R.U.D. capabilities (Create, Read, Update and Delete).
