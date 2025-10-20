@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import tripRoutes from "./routes/tripRoutes.js";
 import journalRoutes from "./routes/journalRoutes.js";
 
+// Setups
 dotenv.config();
 const app = express();
 
@@ -21,6 +22,7 @@ mongoose
     .then(() => console.log("MongoDB Connected..."))
     .catch((err) => console.error("MongoDB Connection Error:", err));
 
+// Listener
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on Port: ${PORT}`));
 
