@@ -6,20 +6,19 @@ const router = express.Router();
 // CREATE Trip
 router.post("/", async (req, res) => {
   try {
-    const { destination, startDate, endDate, budget, notes, coverImage } = req.body;
+    const { title, location, startDate, endDate, description, imageUrl } = req.body;
 
-    // Validation
-    if (!destination || !startDate || !endDate) {
-      return res.status(400).json({ error: "Destination, startDate, and endDate are required." });
+    if (!title || !location || !startDate || !endDate) {
+      return res.status(400).json({ error: "Title, location, startDate, and endDate are required." });
     }
 
     const newTrip = new Trip({
-      destination,
+      title,
+      location,
       startDate,
       endDate,
-      budget,
-      notes,
-      coverImage,
+      description,
+      imageUrl,
     });
 
     const savedTrip = await newTrip.save();
@@ -33,10 +32,21 @@ router.post("/", async (req, res) => {
 // READ All Trips
 router.get("/", async (req, res) => {
   try {
-    const trips = await Trip.find();
+    const trips = await Trip.find().sort({ createdAt: -1 });
     res.status(200).json(trips);
   } catch (err) {
     res.status(500).json({ error: "Server error fetching trips." });
+  }
+});
+
+// READ Single Trip
+router.get("/:id", async (req, res) => {
+  try {
+    const trip = await Trip.findById(req.params.id);
+    if (!trip) return res.status(404).json({ error: "Trip not found." });
+    res.status(200).json(trip);
+  } catch (err) {
+    res.status(500).json({ error: "Error fetching trip." });
   }
 });
 
@@ -63,3 +73,5 @@ router.delete("/:id", async (req, res) => {
 });
 
 export default router;
+
+
