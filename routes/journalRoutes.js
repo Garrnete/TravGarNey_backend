@@ -1,57 +1,76 @@
 import express from "express";
-import JournalEntry from "../models/JournalEntry.js";
+import Journal from "../models/Journal.js";
+
 const router = express.Router();
 
-// Create
+// CREATE Journal
 router.post("/", async (req, res) => {
   try {
-    const entry = new JournalEntry(req.body);
-    const savedEntry = await entry.save();
-    res.status(201).json(savedEntry);
+    const { title, content, date } = req.body;
+
+    if (!title || !content || !date) {
+      return res
+        .status(400)
+        .json({ error: "Title, content, and date are required." });
+    }
+
+    const newJournal = new Journal({ title, content, date });
+    const savedJournal = await newJournal.save();
+    res.status(201).json(savedJournal);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    console.error("Error creating journal:", err);
+    res.status(500).json({ error: "Server error while creating journal." });
   }
 });
 
-// Read all (optionally filter by tripId)
+// READ All Journals
 router.get("/", async (req, res) => {
   try {
-    const { tripId } = req.query;
-    const entries = tripId ? await JournalEntry.find({ tripId }) : await JournalEntry.find();
-    res.json(entries);
+    const journals = await Journal.find().sort({ createdAt: -1 });
+    res.status(200).json(journals);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ error: "Server error fetching journals." });
   }
 });
 
-// Read one
+// READ Single Journal
 router.get("/:id", async (req, res) => {
   try {
-    const entry = await JournalEntry.findById(req.params.id);
-    res.json(entry);
+    const journal = await Journal.findById(req.params.id);
+    if (!journal) return res.status(404).json({ error: "Journal not found." });
+    res.status(200).json(journal);
   } catch (err) {
-    res.status(404).json({ message: "Entry not found" });
+    res.status(500).json({ error: "Error fetching journal." });
   }
 });
 
-// Update
+// UPDATE Journal
 router.put("/:id", async (req, res) => {
   try {
-    const updated = await JournalEntry.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.json(updated);
+    const updatedJournal = await Journal.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    if (!updatedJournal)
+      return res.status(404).json({ error: "Journal not found." });
+    res.status(200).json(updatedJournal);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(500).json({ error: "Error updating journal." });
   }
 });
 
-// Delete
+// DELETE Journal
 router.delete("/:id", async (req, res) => {
   try {
-    await JournalEntry.findByIdAndDelete(req.params.id);
-    res.json({ message: "Journal entry deleted" });
+    const deletedJournal = await Journal.findByIdAndDelete(req.params.id);
+    if (!deletedJournal)
+      return res.status(404).json({ error: "Journal not found." });
+    res.status(200).json({ message: "Journal deleted successfully." });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ error: "Error deleting journal." });
   }
 });
 
 export default router;
+
