@@ -59,6 +59,26 @@ Code	Message
 500	Server error
 ```
 
+```
+🛠 Tech Stack
+Layer	Technology
+Frontend	React (Vite), React Router DOM, TailwindCSS
+Backend	Node.js, Express.js
+Database	MongoDB with Mongoose
+HTTP Client	Axios
+Styling	TailwindCSS
+Tools	Postman (API testing), VS Code
+```
+
+## 🧩 Future Enhancements
+
+Attach journals to specific trips
+
+Add authentication (JWT)
+
+Implement image upload via Cloudinary
+
+Add map/location integration
 
 
 https://github.com/Garrnete/TravGarNey_frontend.git
