@@ -81,4 +81,6 @@ Implement image upload via Cloudinary
 Add map/location integration
 
 
+```
 https://github.com/Garrnete/TravGarNey_frontend.git
+```
