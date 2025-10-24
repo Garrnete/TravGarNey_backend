@@ -66,12 +66,12 @@ router.delete("/:id", async (req, res) => {
   try {
     const deletedTrip = await Trip.findByIdAndDelete(req.params.id);
     if (!deletedTrip) return res.status(404).json({ error: "Trip not found." });
-    res.status(200).json({ message: "Trip deleted successfully." });
+    return res.status(200).json({ message: "Trip deleted successfully." });
   } catch (err) {
-    res.status(500).json({ error: "Error deleting trip." });
+    console.error("Error deleting trip:", err);
+    return res.status(500).json({ error: "Error deleting trip." });
   }
 });
 
 export default router;
-
 
